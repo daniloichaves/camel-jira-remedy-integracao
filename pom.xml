@@ -11,6 +11,10 @@
 	<name>demo</name>
 	<description>Integração entre Jira e Remedy</description>
 
+	<prerequisites>
+		<maven>3.3.3</maven>
+	</prerequisites>
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -26,20 +30,41 @@
 
 		<!-- Spring Boot default profile in order to use an embedded database -->
 		<run.profiles>dev</run.profiles>
+		<hibernate.version>5.2.10.Final</hibernate.version>
 	</properties>
 
-	<!-- Apache Camel -->
+	<dependencyManagement>
+		<dependencies>
+			<!-- We need to align the Hibernate versions -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-entitymanager</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
+		<!-- Spring Framework -->
 		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-servlet</artifactId>
-			<version>${camel.version}</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jpa-starter</artifactId>
-			<version>${camel.version}</version>
+			<artifactId>camel-spring-boot-starter</artifactId>
 		</dependency>
+
+		<!-- Apache Camel -->
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-jackson-starter</artifactId>
@@ -55,28 +80,31 @@
 			<artifactId>camel-spring-boot-starter</artifactId>
 			<version>${camel.version}</version>
 		</dependency>
-
-
-	<!-- Spring Framework -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-servlet</artifactId>
+			<version>${camel.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jpa-starter</artifactId>
+			<version>${camel.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.hsqldb</groupId>
-			<artifactId>hsqldb</artifactId>
-			<scope>runtime</scope>
-		</dependency>
+
+		<!-- JDBC -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -132,13 +160,13 @@
 	</pluginRepositories>
 
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-entitymanager</artifactId>
-				<version>5.2.10.Final</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+	<!-- <dependencyManagement> -->
+	<!-- <dependencies> -->
+	<!-- <dependency> -->
+	<!-- <groupId>org.hibernate</groupId> -->
+	<!-- <artifactId>hibernate-entitymanager</artifactId> -->
+	<!-- <version>5.2.10.Final</version> -->
+	<!-- </dependency> -->
+	<!-- </dependencies> -->
+	<!-- </dependencyManagement> -->
 </project>
