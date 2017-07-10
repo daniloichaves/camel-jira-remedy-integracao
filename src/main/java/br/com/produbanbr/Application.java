@@ -49,21 +49,21 @@ public class Application extends SpringBootServletInitializer {
 		}
 	}
 
-	@Component
-	class Backend extends RouteBuilder {
-
-		@Override
-		public void configure() {
-			// A first route generates some orders and queue them in DB
-			from("timer:new-order?delay=1s&period={{example.generateOrderPeriod:2s}}").routeId("generate-order")
-					.bean("orderService", "generateOrder").to("jpa:org.apache.camel.example.spring.boot.rest.jpa.Order")
-					.log("Inserted new order ${body.id}");
-
-			// A second route polls the DB for new orders and processes them
-			from("jpa:org.apache.camel.example.spring.boot.rest.jpa.Order" + "?consumer.namedQuery=new-orders"
-					+ "&consumer.delay={{example.processOrderPeriod:5s}}"
-					+ "&consumeDelete=false").routeId("process-order").log(
-							"Processed order #id ${body.id} with ${body.amount} copies of the «${body.book.description}» book");
-		}
-	}
+//	@Component
+//	class Backend extends RouteBuilder {
+//
+//		@Override
+//		public void configure() {
+//			// A first route generates some orders and queue them in DB
+//			from("timer:new-order?delay=1s&period={{example.generateOrderPeriod:2s}}").routeId("generate-order")
+//					.bean("orderService", "generateOrder").to("jpa:org.apache.camel.example.spring.boot.rest.jpa.Order")
+//					.log("Inserted new order ${body.id}");
+//
+//			// A second route polls the DB for new orders and processes them
+//			from("jpa:org.apache.camel.example.spring.boot.rest.jpa.Order" + "?consumer.namedQuery=new-orders"
+//					+ "&consumer.delay={{example.processOrderPeriod:5s}}"
+//					+ "&consumeDelete=false").routeId("process-order").log(
+//							"Processed order #id ${body.id} with ${body.amount} copies of the «${body.book.description}» book");
+//		}
+//	}
 }
