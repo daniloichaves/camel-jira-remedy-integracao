@@ -1,5 +1,7 @@
 package hello;
 
+import java.io.FileReader;
+
 import org.apache.camel.builder.RouteBuilder;
 
 /**
@@ -18,8 +20,17 @@ public class MyRouteBuilder extends RouteBuilder {
 //        	.log("${body}").to("file:dest");
     	
 // Setting a local server to listen
-    	from("jetty:http://localhost:9000/api/camel")
-    	.log("${body}");
+    	from("jetty:http://localhost:9000/api/camel").to("direct:test");
+    	
+    	
+    	from("direct:test").convertBodyTo(String.class)
+      .to("file:dest?fileName=restoutput-${date:now:yyyyMMdd_HHmmss_SSS}.json");
+    	
+//    	Gson gson = new Gson();
+//    	
+//    	WebhookEvent webhookEvent = gson.fromJson(new FileReader("/dest/restoutput.json"), WebhookEvent.class);
+//    	System.out.println(webhookEvent.getWebhookEvent());
+    	
     }
 
 }
