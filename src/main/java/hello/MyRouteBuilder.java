@@ -24,7 +24,7 @@ public class MyRouteBuilder extends RouteBuilder {
     	
     	
     	from("direct:test").convertBodyTo(String.class)
-      .to("file:dest?fileName=restoutput-${date:now:yyyyMMdd_HHmmss_SSS}.json");
+      .to("file:dest?fileName=restoutput.json");
     	
 //    	Gson gson = new Gson();
 //    	
