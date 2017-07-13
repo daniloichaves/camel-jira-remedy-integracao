@@ -1,8 +1,14 @@
 package hello;
 
+import java.io.File;
 import java.io.FileReader;
 
+import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
+
+import com.google.gson.Gson;
+
 
 /**
  * A Camel Java DSL Router
@@ -22,9 +28,20 @@ public class MyRouteBuilder extends RouteBuilder {
 // Setting a local server to listen
     	from("jetty:http://localhost:9000/api/camel").to("direct:test");
     	
-    	
+//    	Processor myProcessor = new MyProcessor();
     	from("direct:test").convertBodyTo(String.class)
-      .to("file:dest?fileName=restoutput.json");
+      .to("file:dest?fileName=restoutput.json").process(new Processor(){
+    	  public void process(Exchange exchange) throws Exception {
+//    		  	String body = exchange.getIn().getBody().toString();
+    		  
+    	    	Gson gson = new Gson();
+    	    	String path = new File(".").getCanonicalPath();
+    	    	WebhookEvent event = gson.fromJson(new FileReader(path + "/dest/restoutput.json"), WebhookEvent.class);
+    	    	
+    	    	System.out.println(event.getWebhookEvent());
+    	  }
+      });
+    	
     	
 //    	Gson gson = new Gson();
 //    	
