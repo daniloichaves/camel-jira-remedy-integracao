@@ -28,19 +28,23 @@ public class MyRouteBuilder extends RouteBuilder {
 // Setting a local server to listen
     	from("jetty:http://localhost:9000/api/camel").to("direct:test");
     	
-//    	Processor myProcessor = new MyProcessor();
+//    	create a process with exchange
+//    	from("direct:test").convertBodyTo(String.class)
+//      .to("file:dest?fileName=restoutput.json").process(new Processor(){
+//    	  public void process(Exchange exchange) throws Exception {
+////    		  	String body = exchange.getIn().getBody().toString();
+//    		  
+//    	    	Gson gson = new Gson();
+//    	    	String path = new File(".").getCanonicalPath();
+//    	    	WebhookEvent event = gson.fromJson(new FileReader(path + "/dest/restoutput.json"), WebhookEvent.class);
+//    	    	
+//    	    	System.out.println(event.getWebhookEvent());
+//    	  }
+//      });
+    	
+//    	Call an existent process
     	from("direct:test").convertBodyTo(String.class)
-      .to("file:dest?fileName=restoutput.json").process(new Processor(){
-    	  public void process(Exchange exchange) throws Exception {
-//    		  	String body = exchange.getIn().getBody().toString();
-    		  
-    	    	Gson gson = new Gson();
-    	    	String path = new File(".").getCanonicalPath();
-    	    	WebhookEvent event = gson.fromJson(new FileReader(path + "/dest/restoutput.json"), WebhookEvent.class);
-    	    	
-    	    	System.out.println(event.getWebhookEvent());
-    	  }
-      });
+    	.to("file:dest?fileName=restoutput.json").process(new MyProcessor());
     	
     	
 //    	Gson gson = new Gson();
