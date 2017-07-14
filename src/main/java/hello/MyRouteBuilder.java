@@ -44,8 +44,11 @@ public class MyRouteBuilder extends RouteBuilder {
     	
 //    	Call an existent process
     	from("direct:test").convertBodyTo(String.class)
-    	.to("file:dest?fileName=restoutput.json").process(new MyProcessor());
-    	
+    	.choice()
+    		.when(body().startsWith("<")).log("xml")
+    		.when(body().startsWith("{")).to("file:dest?fileName=restoutput.json").process(new MyProcessor())
+    		.otherwise().log("erro")
+    	.end();
     	
 //    	Gson gson = new Gson();
 //    	
