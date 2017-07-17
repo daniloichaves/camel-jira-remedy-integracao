@@ -14,6 +14,6 @@ public class MyProcessor implements Processor{
     	String path = new File(".").getCanonicalPath();
     	WebhookEvent event = gson.fromJson(new FileReader(path + "/dest/restoutput.json"), WebhookEvent.class);
     	
-    	System.out.println(event);
+    	System.out.println(event.getWebhookEvent());
 	}
 }
