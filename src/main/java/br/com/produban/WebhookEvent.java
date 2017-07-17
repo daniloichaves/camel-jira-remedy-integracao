@@ -1,4 +1,4 @@
-package hello;
+package br.com.produban;
 
 import java.io.Serializable;
 

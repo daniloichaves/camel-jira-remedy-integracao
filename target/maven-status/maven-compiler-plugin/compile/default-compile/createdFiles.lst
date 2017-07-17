@@ -1,11 +1,6 @@
-hello\MyRouteBuilder.class
 io\spring\guides\gs_producing_web_service\Currency.class
 io\spring\guides\gs_producing_web_service\package-info.class
 io\spring\guides\gs_producing_web_service\ObjectFactory.class
 io\spring\guides\gs_producing_web_service\GetCountryRequest.class
-hello\MyProcessor.class
-hello\Application.class
 io\spring\guides\gs_producing_web_service\GetCountryResponse.class
-hello\HomeController.class
-hello\WebhookEvent.class
 io\spring\guides\gs_producing_web_service\Country.class
