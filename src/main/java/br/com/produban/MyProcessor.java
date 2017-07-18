@@ -1,5 +1,7 @@
 package br.com.produban;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.io.FileReader;
 
@@ -13,7 +15,7 @@ public class MyProcessor implements Processor{
     	Gson gson = new Gson();
     	String path = new File(".").getCanonicalPath();
     	WebhookEvent event = gson.fromJson(new FileReader(path + "/dest/restoutput.json"), WebhookEvent.class);
-    	
+    	assertEquals("jira:issue_updated", event.getWebhookEvent());
     	System.out.println(event.getWebhookEvent());
 	}
 }
