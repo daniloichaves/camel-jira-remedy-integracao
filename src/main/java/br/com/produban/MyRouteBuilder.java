@@ -1,13 +1,6 @@
 package br.com.produban;
 
-import java.io.File;
-import java.io.FileReader;
-
-import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-
-import com.google.gson.Gson;
 
 
 /**

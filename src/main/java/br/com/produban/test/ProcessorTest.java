@@ -1,7 +1,5 @@
 package br.com.produban.test;
 
-import static org.junit.Assert.assertEquals;
-
 import org.apache.camel.builder.RouteBuilder;
 import org.junit.Test;
 

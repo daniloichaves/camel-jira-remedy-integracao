@@ -2,6 +2,7 @@ package br.com.produban;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class WebhookEvent implements Serializable{
 	private String webhookEvent;
 
