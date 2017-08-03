@@ -16,7 +16,8 @@ public class MyRouteBuilder extends RouteBuilder {
         // (leaving them in place - see the 'noop' flag)
         // then performs content based routing on the message using XPath
         from("jetty:http://0.0.0.0:9000/test")
-                    .log("${body}");
+        .convertBodyTo(String.class)
+        .to("file:data?fileName=input${date:now:yyyyMMddHHmmssSSS}.json");
     }
 
 }
