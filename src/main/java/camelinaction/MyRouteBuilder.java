@@ -17,7 +17,7 @@ public class MyRouteBuilder extends RouteBuilder {
         // then performs content based routing on the message using XPath
         from("jetty:http://0.0.0.0:9000/api/camel")
         .convertBodyTo(String.class)
-        .to("file:data?fileName=input${date:now:yyyyMMddHHmmss}.json");
+        .to("file:data?fileName=input${date:now:yyyyMMddHHmmss}.json").log("${body}");
     }
 
 }
